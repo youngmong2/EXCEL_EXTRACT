@@ -1,0 +1,297 @@
+<!doctype html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Excel Merge Studio | 엑셀 병합·추출 허브</title><style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
+:root{color-scheme:light;--bg:#f4f7fc;--ink:#17253d;--muted:#67778f;--line:#dae3f0;--blue:#315ed5;--blue2:#234cb4;--navy:#152c50;--soft:#ecf2ff;--green:#1f8a68;font-family:'DM Sans','Noto Sans KR',system-ui,'Malgun Gothic',sans-serif;color:var(--ink);background:var(--bg)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#e9f0fd 0,#f5f8fe 340px,#f5f8fe 100%);min-height:100vh} main{max-width:1130px;margin:0 auto;padding:28px 25px 64px}
+.topnav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 0 27px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:15px;letter-spacing:-.02em}.logo{display:grid;place-items:center;width:39px;height:39px;border-radius:12px;background:#1d4caa;color:#fff;font-size:20px}.topmeta{display:flex;align-items:center;gap:9px;color:#637793;font-weight:700;font-size:12px}.online{height:8px;width:8px;background:#27b38a;border-radius:50%;display:inline-block;box-shadow:0 0 0 4px #d7f5e9}
+.hero{background:linear-gradient(115deg,#183765,#224c91 62%,#335bbb);border-radius:24px;padding:33px 38px 35px;color:#fff;position:relative;overflow:hidden;box-shadow:0 14px 32px #1a3c7619}.hero:after{content:'';position:absolute;width:270px;height:270px;right:-55px;top:-90px;border:45px solid #ffffff12;border-radius:50%;pointer-events:none}.hero .eyebrow{font-size:12px;letter-spacing:.13em;font-weight:800;color:#b9d2ff;margin:0 0 11px}.hero h1{font-size:clamp(23px,3vw,33px);line-height:1.3;margin:0 0 11px;letter-spacing:-.055em}.hero .sub{color:#dbe6fa;font-size:14px;max-width:790px;line-height:1.85;margin:0}.featurechips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.featurechips span{background:#ffffff16;border:1px solid #ffffff2e;color:#f5f8ff;border-radius:100px;padding:7px 12px;font-weight:600;font-size:12px}
+.workflow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:22px 0 7px}.workflow span{font-size:12px;font-weight:700;color:#647893}.workflow b{display:inline-grid;place-items:center;background:#dbe7fd;color:#2453ae;width:25px;height:25px;border-radius:50%;margin-right:7px}.workflow .arrow{color:#9eafc8}
+.panel{background:#fff;border:1px solid #dfe7f3;border-radius:18px;padding:27px 30px;margin:17px 0;box-shadow:0 5px 24px #203b6809}.panel h2{font-size:20px;letter-spacing:-.04em;margin:4px 0 12px;line-height:1.4}.panel .sub{color:var(--muted);line-height:1.75;font-size:13px;margin:6px 0 15px}.step{display:inline-block;color:#315fc6;background:#eaf1fe;border-radius:99px;padding:6px 11px;font-size:11px;font-weight:800;letter-spacing:.045em;margin-bottom:8px}
+input,select,button{font:inherit}input[type=file]{display:block;width:100%;max-width:680px;margin:16px auto 0;color:#456087;font-size:13px;background:#fff;border:1px solid #c7d7ef;border-radius:10px;padding:11px;cursor:pointer}input[type=file]::file-selector-button{padding:10px 13px;background:#2456c1;color:#fff;border:0;border-radius:7px;margin-right:13px;font-weight:800;cursor:pointer}.drop{display:block;background:#f6f9ff;border:2px dashed #b0c5e8;border-radius:15px;padding:28px 22px;text-align:center;transition:background .2s,border-color .2s;color:#284e8d;font-size:15px}.drop:hover,.drop:focus-within{background:#ecf3ff;border-color:#577dcc}.drop .muted{margin:8px 0;color:#7a8eaa}
+button{background:var(--blue);border:1px solid transparent;color:white;border-radius:9px;padding:12px 18px;cursor:pointer;font-weight:800;font-size:13px;transition:background .15s,transform .15s,box-shadow .15s}button:hover:not(:disabled){background:var(--blue2);box-shadow:0 4px 13px #2d56b42b}button:active:not(:disabled){transform:translateY(1px)}button:disabled{opacity:.5;cursor:not-allowed}button.secondary{background:#ecf2fc;color:#2853ad;border-color:#d5e1f5}button.secondary:hover:not(:disabled){background:#dbe8ff}.field{padding:12px 13px;background:#fff;border:1px solid #cad6e8;border-radius:10px;color:#253a56;width:100%;min-height:45px;outline:none;transition:border-color .15s,box-shadow .15s}.field:focus{border-color:#517de4;box-shadow:0 0 0 3px #dce8ff}.field:disabled{background:#f0f3f9;color:#9badc4}.field::placeholder{color:#9babbd}
+label:not(.drop){display:block;margin:14px 0 8px;font-size:13px;font-weight:750;color:#415572}.options{display:flex;gap:17px;flex-wrap:wrap;align-items:stretch}.options>div{min-width:0}.options label:has(input[type=checkbox]),.options label:has(input[type=radio]),label.options:has(input[type=checkbox]){display:flex;align-items:center;gap:8px;cursor:pointer;margin:11px 0 4px;font-weight:600;font-size:13px;color:#3d526f}input[type=checkbox],input[type=radio]{accent-color:#315ed5;width:16px;height:16px;flex:none}
+#list{list-style:none;padding:0;line-height:1.5;margin:14px 0 0;display:grid;gap:8px}#list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;border:1px solid #e1e9f6;border-radius:10px;background:#f8fbff;font-size:13px;color:#365071;overflow-wrap:anywhere}#list li:before{content:'XLS';display:inline-grid;place-items:center;background:#e2f2e8;color:#208056;font-weight:800;font-size:10px;border-radius:6px;min-width:38px;height:29px;margin-right:5px}#list li.muted:before{display:none}#list li button{padding:6px 10px!important;font-size:12px;flex:none}
+.muted{color:var(--muted);font-size:13px}.warn{color:#996115;background:#fff8eb;border:1px solid #f9e7c4;border-radius:9px;padding:12px 14px;font-size:12px;line-height:1.75}.error{color:#bf3c52}.success{color:#1a8668}.status{white-space:pre-wrap;line-height:1.75;word-break:break-word;border-radius:10px;background:#f3f7fd;border:1px solid #e0e9f6;padding:13px 15px;margin-top:16px;min-height:52px}.status.error{background:#fff4f5;border-color:#f4dadd}.status.success{background:#eefaf5;border-color:#d3f0e2}
+.actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.actions button{min-height:43px}.previewWrap{overflow:auto;max-height:310px;border:1px solid #dfe7f1;border-radius:12px;margin-top:13px;background:#fff}table{border-collapse:collapse;width:100%;font-size:12px;white-space:nowrap}th,td{border-bottom:1px solid #e5ebf4;padding:10px 12px;text-align:left;max-width:260px;overflow:hidden;text-overflow:ellipsis}th{position:sticky;top:0;background:#eaf0fa;color:#38516e;font-weight:800;z-index:1}td{background:#fff;color:#3f536c}tbody tr:nth-child(even) td{background:#f9fbff}.pill{display:inline-block;background:#e8f4ee;border:1px solid #c7ead8;padding:7px 10px;border-radius:20px;color:#267457;font-size:12px;font-weight:800}.hint{padding:11px 14px;background:#f1f6ff;border-left:3px solid #5c87e6;border-radius:6px;line-height:1.75;color:#536b91;font-size:12px}
+#filterPanel{border-top:3px solid #6a91e3}#columnState{margin:10px 0 0}#preview{margin-top:11px}#filterPanel .previewWrap{margin-bottom:15px}
+.exportgroup{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:18px}.exportcard{padding:19px;border:1px solid #dce6f5;border-radius:14px;background:#f8fbff;display:flex;flex-direction:column;gap:9px}.exportcard.extract{background:#f5fbf8;border-color:#d3e9df}.exportcard h3{font-size:15px;margin:0;letter-spacing:-.02em}.exportcard p{font-size:12px;color:#687b91;margin:0 0 6px;line-height:1.6}.exportcard .actions{align-items:stretch;flex-direction:column;gap:9px}.exportcard button{width:100%}.exportcard.extract button:not(.secondary){background:#198665}.exportcard.extract button:hover:not(:disabled){background:#12684f}.exportcard.extract button.secondary{background:#e4f4ec;color:#166b53;border-color:#cde9da}.exportcard .icon{font-size:23px}.footer{margin:24px 0;text-align:center;font-size:12px;color:#8795a8}ul:not(#list){padding-left:20px;line-height:1.9;color:#5b6f89;font-size:13px}ul:not(#list) li{margin:5px 0}
+@media(max-width:700px){main{padding:14px 13px 36px}.topnav{padding-bottom:15px}.topmeta{display:none}.hero{padding:27px 22px;border-radius:17px}.hero h1{font-size:24px}.panel{padding:21px 17px;margin:12px 0;border-radius:14px}.panel h2{font-size:18px}.options{gap:8px}.options>div{flex-basis:100%!important}.workflow{gap:5px}.workflow span{font-size:11px}.workflow .arrow{font-size:10px}.exportgroup{grid-template-columns:1fr}.actions{align-items:stretch}.actions button{flex:1}.featurechips span{font-size:11px}}
+
+.hub-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:19px 0 22px}
+.hub-tile{display:block;text-decoration:none;background:#fff;border:1px solid #dce5f3;border-radius:18px;padding:23px;color:#203858;box-shadow:0 5px 20px #1c3b680c;transition:transform .15s,box-shadow .15s,border-color .15s}
+.hub-tile:hover,.hub-tile:focus-visible{transform:translateY(-3px);border-color:#7da1e0;box-shadow:0 10px 26px #203b6820}
+.hub-tile .hub-icon{font-size:29px;display:block;margin-bottom:14px}.hub-tile strong{font-size:18px}.hub-tile p{font-size:13px;line-height:1.7;color:#667890;margin:9px 0 16px}.hub-tile .hub-link{color:#2458c0;font-weight:800;font-size:13px}.hub-tile.green .hub-link{color:#188063}
+#uploadPanel,#filterPanel,#exportPanel{scroll-margin-top:18px}
+@media(max-width:700px){.hub-grid{grid-template-columns:1fr;gap:11px}.hub-tile{padding:18px}}
+
+/* Interactive workspace navigation */
+[hidden]{display:none!important}
+.workspace-tabs{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:22px 0 16px;padding:9px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:0 5px 18px #17345a0a}
+.workspace-tab{border:0;border-radius:11px;background:transparent;color:#516683;font-weight:800;padding:12px 20px;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap}
+.workspace-tab:hover{background:#eaf0fc;color:#2351a6}.workspace-tab[aria-selected="true"]{background:#1d4caa;color:white;box-shadow:0 5px 12px #1d4caa30}
+.workspace-tab:focus-visible,.hub-tile:focus-visible{outline:3px solid #7ab3ff;outline-offset:2px}
+.mode-heading{margin:12px 0 16px;padding:18px 23px;border-radius:16px;background:#fff;border:1px solid var(--line)}
+.mode-heading h2{margin:0 0 6px;font-size:21px}.mode-heading p{margin:0;color:#667791;font-size:13px;line-height:1.75}
+@media(max-width:640px){.workspace-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px}.workspace-tab{padding:11px 8px;font-size:12px}.workspace-tab:first-child{grid-column:1/-1}}
+
+/* UI refinement v2: presentation only. Existing IDs, events, and data logic unchanged. */
+:root{--bg:#f4f7fb;--line:#dce5f0;--shadow:0 7px 28px rgba(27,55,99,.055);--focus:#3b74ef}
+body{background:radial-gradient(ellipse 1100px 450px at 45% -160px,#dce9ff 0,transparent 75%),#f5f7fb}
+main{max-width:1160px;padding-top:18px}
+.topnav{padding:10px 2px 22px}.brand{font-size:16px;letter-spacing:-.025em}.logo{border-radius:11px;box-shadow:0 4px 13px #1d4caa30}.topmeta{font-size:12px}
+.hero{padding:30px 35px;border-radius:20px;background:linear-gradient(118deg,#163465,#214c8d 64%,#3365b1);box-shadow:0 12px 32px rgba(32,66,114,.16)}
+.hero h1{font-weight:800;font-size:clamp(25px,3vw,35px);line-height:1.3}.hero .sub{font-size:13px;line-height:1.8}.featurechips{margin-top:18px}.featurechips span{border-color:#ffffff27}
+.workspace-tabs{position:sticky;top:12px;z-index:30;margin:18px 0 16px;padding:7px;gap:5px;max-width:100%;border:1px solid #dce6f3;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 7px 22px rgba(38,61,104,.11)}
+.workspace-tab{padding:12px 18px;min-height:43px;border-radius:10px;font-size:13px;letter-spacing:-.01em}.workspace-tab[aria-selected=true]{background:#2557b6;box-shadow:0 4px 13px #2454a72e}
+/* Keep the hub focused on choosing one action. */
+.hub-grid{gap:16px;margin:21px 0 15px}.hub-tile{padding:26px;min-height:210px;display:flex;flex-direction:column;align-items:flex-start;border-radius:17px;box-shadow:var(--shadow)}.hub-tile .hub-icon{display:grid;place-items:center;width:54px;height:54px;background:#edf3ff;border-radius:15px;margin-bottom:18px}.hub-tile.green .hub-icon{background:#e9f8f2}.hub-tile strong{font-size:19px;letter-spacing:-.035em}.hub-tile p{margin:8px 0 auto;line-height:1.75}.hub-tile .hub-link{padding-top:14px}
+/* Workspace pages should prioritize the actionable forms. */
+body:has(#hubHome[hidden]) .hero{padding:22px 28px;border-radius:17px}
+body:has(#hubHome[hidden]) .hero .eyebrow,body:has(#hubHome[hidden]) .hero .featurechips{display:none}
+body:has(#hubHome[hidden]) .hero h1{font-size:clamp(19px,2.1vw,24px);margin-bottom:5px}
+body:has(#hubHome[hidden]) .hero .sub{max-width:950px;font-size:12px;line-height:1.6}
+.mode-heading{margin:17px 3px 10px}.mode-heading h2{margin:0 0 3px;font-size:22px;letter-spacing:-.045em}.mode-heading p{margin:0;color:#6c7d94;font-size:13px;line-height:1.6}
+.workflow{margin:16px 3px 7px}.workflow span{color:#57708f}.workflow b{background:#e6eeff}
+.panel{border-radius:16px;border:1px solid #e0e7f1;padding:25px 28px;margin:13px 0;box-shadow:var(--shadow)}.panel h2{font-size:19px;margin:2px 0 8px}.panel .sub{max-width:940px}
+.step{letter-spacing:.05em;background:#eaf1ff;font-size:10px;padding:6px 10px;margin-bottom:7px}
+.drop{padding:25px;border-color:#aebfe0;background:#f8faff;border-radius:13px}.drop:focus-within,.drop:hover{background:#f0f5ff}.drop input[type=file]{max-width:610px}
+#list{grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))}#list li{min-height:53px;justify-content:flex-start}#list li button{margin-left:auto}
+.options{gap:14px 20px}.field{border-radius:9px;border-color:#ced9e8}.field:focus-visible,button:focus-visible,a:focus-visible,input[type=file]:focus-visible{outline:3px solid #9dbdff;outline-offset:2px}
+#filterPanel{border-top:1px solid #dbe4f2}#columnState{margin-top:8px}#filterPanel .options:has(>div){margin-bottom:5px}
+.previewWrap{max-height:390px;scrollbar-color:#b4c6dd transparent}th,td{padding:11px 13px}th{background:#eaf1fd}tbody tr:hover td{background:#eef5ff}
+.exportgroup{grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:14px}.exportcard{background:#f8fbff;padding:20px;border-radius:13px;min-height:205px}.exportcard h3{font-size:16px}.exportcard .actions button{min-height:45px}
+#mergeCard:not([hidden]),#extractCard:not([hidden]){max-width:none}#status{font-size:12px}
+.hint{border-left-width:4px}.warn{border-radius:10px}.footer{padding-bottom:14px}
+@media(max-width:760px){main{padding:14px 13px 30px}.topnav{padding:4px 0 13px}.hero{padding:23px 21px}.hero h1{font-size:25px}.workspace-tabs{top:6px;gap:4px;margin:13px 0}.workspace-tab{flex:1;min-width:0;padding:11px 7px;font-size:12px}.hub-grid{grid-template-columns:1fr;gap:11px}.hub-tile{min-height:0;padding:19px}.hub-tile .hub-icon{margin-bottom:9px;width:45px;height:45px;font-size:25px}.hub-tile p{margin-bottom:5px}.panel{padding:19px 16px}.mode-heading{margin:16px 2px 6px}.mode-heading h2{font-size:19px}.workflow{gap:5px}.workflow span{font-size:11px}.drop{padding:20px 12px}input[type=file]{padding:8px;font-size:12px}.featurechips{gap:5px}.exportgroup{grid-template-columns:1fr}}
+@media(max-width:420px){.workspace-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.workspace-tab:first-child{grid-column:auto}.workspace-tab{font-size:11px;padding:10px 4px}.hero h1{font-size:22px}.featurechips span{font-size:10px}body:has(#hubHome[hidden]) .hero .sub{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+</style></head><body><main>
+<header class="topnav"><div class="brand"><span class="logo">▤</span> Excel Merge Studio</div><div class="topmeta"><span class="online"></span> 브라우저에서 파일 처리 · XLSX / CSV</div></header>
+<div class="hero"><p class="eyebrow">ALL-IN-ONE SPREADSHEET WORKSPACE</p><h1>엑셀 병합과 조건별 데이터 추출,<br>한 곳에서 간편하게</h1><p class="sub">여러 파일을 하나의 시트로 병합하거나, 업로드한 문서에서 특정 열을 골라 단어가 포함된 행만 추출하세요. 대표도면 이미지 및 주요 서식 복사를 지원합니다.</p><div class="featurechips"><span>✓ 다중 파일 업로드</span><span>✓ 단일 시트 병합</span><span>✓ 열 선택 검색</span><span>✓ 이미지 복사 지원</span><span>✓ XLSX 다운로드</span></div></div>
+<nav class="workspace-tabs" role="tablist" aria-label="작업 기능 선택">
+<button class="workspace-tab" type="button" id="tab-home" role="tab" aria-selected="true" aria-controls="hubHome" data-mode="home">⌂ 홈</button>
+<button class="workspace-tab" type="button" id="tab-merge" role="tab" aria-selected="false" aria-controls="uploadPanel" data-mode="merge">▤ 전체 엑셀 병합</button>
+<button class="workspace-tab" type="button" id="tab-extract" role="tab" aria-selected="false" aria-controls="filterPanel" data-mode="extract">⌕ 열 선택 · 조건 추출</button>
+</nav>
+<div id="hubHome"><nav class="hub-grid" aria-label="주요 기능 바로가기">
+<a class="hub-tile" href="#merge" data-open-mode="merge"><span class="hub-icon" aria-hidden="true">📚</span><strong>전체 엑셀 병합</strong><p>여러 CSV·XLSX 파일을 업로드하고 한 시트로 병합합니다. 대표도면 이미지 복사 기능을 유지합니다.</p><span class="hub-link">전체 병합 시작 →</span></a>
+<a class="hub-tile green" href="#extract" data-open-mode="extract"><span class="hub-icon" aria-hidden="true">🔎</span><strong>열 선택 · 조건 추출</strong><p>파일 업로드 후 실제 열을 선택하고 키워드가 포함된 행만 추출해 XLSX로 저장합니다.</p><span class="hub-link">조건 추출 시작 →</span></a>
+</nav>
+</div>
+<div id="modeHeading" class="mode-heading" hidden><h2 id="modeTitle"></h2><p id="modeDescription"></p></div>
+<div class="workflow" id="workflow" hidden><span><b>1</b> 파일 업로드</span><span class="arrow">→</span><span><b>2</b> 열 선택 · 검색</span><span class="arrow">→</span><span><b>3</b> 결과 다운로드</span></div>
+<section class="panel" id="uploadPanel" hidden><div class="step">STEP 01 · 파일 준비</div><h2>1. 원본 파일 업로드</h2><div class="drop" id="drop">📂 <strong>아래 파일 선택 버튼을 누르거나 파일을 끌어다 놓으세요</strong><p class="muted">여러 개의 XLSX 또는 CSV 파일 선택</p><input type="file" id="files" accept=".xlsx,.csv" multiple aria-label="엑셀 파일 선택"></div><ul id="list"><li class="muted">선택한 파일이 없습니다.</li></ul></section>
+<section class="panel" id="filterPanel" hidden><div class="step">STEP 02 · 업로드 후 실제 열 선택</div><h2>2. 검색할 열 선택 및 조건 입력</h2>
+<p class="sub">파일을 추가하면 아래에서 파일·시트를 선택하여 <b>실제 열 제목과 샘플 값</b>을 확인할 수 있습니다. 열을 선택하고 글자를 입력하면 해당 열에 포함된 행만 추출합니다. 파일 목록이 갱신되지 않으면 아래 오류 메시지를 확인하세요.</p>
+<div class="options"><div style="flex:1;min-width:230px"><label for="sampleFile">열을 확인할 원본 파일</label><select id="sampleFile" class="field"><option value="">파일을 먼저 업로드하세요</option></select></div><div style="flex:1;min-width:230px"><label for="sampleSheet">확인할 시트</label><select id="sampleSheet" class="field"><option value="0">첫 번째 시트</option></select></div></div>
+<div class="options"><div style="flex:1;min-width:240px"><label for="filterColumn">검색할 열 선택 (업로드한 엑셀의 실제 열)</label><select id="filterColumn" class="field" disabled><option value="">파일을 먼저 업로드하세요</option></select></div></div>
+<p class="muted" id="columnState">파일을 올리면 A열, B열, C열과 첫 행의 제목이 표시됩니다.</p>
+<div class="options"><div style="flex:1;min-width:220px"><label for="keyword">선택한 열에서 찾을 단어 또는 연도</label><input class="field" id="keyword" placeholder="예: 한화, K9, 2025, 특정 제품명"></div></div>
+<div class="options"><label><input type="checkbox" id="useFilter" checked> 검색 조건으로 행 추출</label><label><input type="checkbox" id="keepHeader" checked> 제목행(첫 행) 유지</label></div>
+
+<div class="actions"><button id="preview" class="secondary">검색 결과 미리보기</button><span class="pill" id="matchCount">파일 업로드 전</span></div>
+<p class="hint" id="previewStatus">원본 파일을 올리고 열과 검색어를 지정하세요. 예: '업체명' 열 선택 → '한화' 입력 → 검색 결과 미리보기 → 한 시트로 XLSX 생성.</p>
+<div class="previewWrap"><table><thead id="previewHead"><tr><th>검색 미리보기</th></tr></thead><tbody id="previewBody"><tr><td>업로드된 파일이 없습니다.</td></tr></tbody></table></div>
+<p class="warn">여러 파일에 같은 의미의 열이 서로 다른 위치에 있으면 열 위치(A/B/C...)가 아닌 파일별 열 매핑이 필요합니다. 여러 파일에 동일한 제목이 있으면 제목명을 우선 매칭하고, 없으면 선택한 열 위치를 사용합니다. 필터로 제거된 행에 걸친 병합 셀·사진 배치는 달라질 수 있습니다.</p></section>
+<section class="panel" id="exportPanel" hidden><div class="step">STEP 03 · 결과 저장</div><h2>3. 전체 병합 / 조건 추출 다운로드</h2><p class="sub">전체 병합은 검색 조건에 관계없이 모든 행을 보존합니다. 조건 추출은 위에서 선택한 열과 검색어를 기준으로 일치하는 행만 저장합니다.</p><div class="options"><label><input type="radio" name="scope" value="all" checked> 모든 시트</label><label><input type="radio" name="scope" value="first"> 파일당 첫 시트만</label></div><label class="options"><input type="checkbox" id="gap" checked> 원본 블록 사이에 빈 행 1개 추가</label><label for="out">출력 파일명</label><input class="field" id="out" value="조건추출_한시트_병합" maxlength="90"><div class="exportgroup"><div class="exportcard" id="mergeCard"><div class="icon">📚</div><h3>전체 파일 병합</h3><p>검색어와 관계없이 모든 데이터를 하나의 시트에 병합합니다.</p><div class="actions"><button id="merge">전체 병합 XLSX 만들기</button><button id="save" class="secondary" disabled>전체 병합 XLSX 다운로드 ↓</button></div></div><div class="exportcard extract" id="extractCard"><div class="icon">🔎</div><h3>조건에 맞는 행 추출</h3><p>위에서 선택한 열에 검색어가 포함된 행만 추출합니다.</p><div class="actions"><button id="extract">조건 추출 XLSX 만들기</button><button id="saveExtract" class="secondary" disabled>추출 결과 XLSX 다운로드 ↓</button></div></div></div><div class="actions" style="justify-content:flex-end;margin-top:12px"><button class="secondary" id="reset">↺ 전체 초기화</button></div><p id="status" class="status muted">준비 완료</p></section>
+<section class="panel" id="limitations" hidden><h2>보존 범위 및 주의 사항</h2><ul><li>지원: 값, 수식, 기본 셀 스타일, 병합 셀, 행 높이, JPEG/PNG/GIF 일반 삽입 사진 및 사진 위치의 행 오프셋 이동</li><li>주의: 다른 시트·파일을 참조하는 수식은 병합 후 결과가 달라질 수 있습니다. 서로 다른 열 너비·인쇄 설정은 한 시트에서 동시에 유지할 수 없습니다.</li><li>제한: 차트, SmartArt, 도형, 매크로, 피벗, 복잡한 조건부 서식, 이미지 특수 효과는 정확히 보존되지 않을 수 있습니다.</li><li>CSV 입력에는 원래 삽입 사진이나 셀 서식이 없습니다. 사진 보존 결과는 XLSX로만 저장할 수 있습니다.</li></ul><p class="warn">ExcelJS 라이브러리(ExcelJS, JSZip)를 인터넷에서 불러옵니다. 기업 네트워크에서 차단되는 경우에는 동작하지 않을 수 있습니다. 파일 내용은 이 페이지에서 처리되며 병합 서버로 업로드되지 않습니다.</p></section><p class="footer">Excel Merge Studio · 모든 처리는 현재 브라우저에서 수행됩니다.</p></main>
+<script>
+'use strict';
+let files=[]; const $=s=>document.querySelector(s); const status=(s,cls='muted')=>{$('#status').className='status '+cls;$('#status').textContent=s};
+function addFiles(input){for(const file of input){if(!/\.(xlsx|csv)$/i.test(file.name))continue;if(!files.some(f=>f.name===file.name&&f.size===file.size&&f.lastModified===file.lastModified))files.push(file)}render()}
+function render(){$('#list').innerHTML='';if(!files.length){let li=document.createElement('li');li.className='muted';li.textContent='선택한 파일이 없습니다.';$('#list').append(li);return}files.forEach((f,i)=>{let li=document.createElement('li');li.textContent=f.name+' ('+(f.size/1024).toFixed(1)+' KB) ';const b=document.createElement('button');b.textContent='삭제';b.className='secondary';b.style.padding='4px 9px';b.onclick=()=>{files.splice(i,1);render();refreshFilterColumns()};li.append(b);$('#list').append(li)})}
+$('#files').addEventListener('change',async e=>{releaseDownload();addFiles(e.target.files);e.target.value='';status(files.length+'개 파일 선택됨. 열 정보를 확인합니다.');try{await refreshFilterColumns()}catch(err){status('열 목록 표시 오류: '+err.message,'error')}});const drop=$('#drop');drop.addEventListener('dragover',e=>{e.preventDefault()});drop.addEventListener('drop',async e=>{e.preventDefault();addFiles(e.dataTransfer.files);status(files.length+'개 파일 선택됨.');try{await refreshFilterColumns()}catch(err){status('열 목록 표시 오류: '+err.message,'error')}});$('#reset').onclick=()=>{files=[];render();releaseDownload();status('초기화되었습니다.');refreshFilterColumns()};
+function colName(n){let s='';for(;n>0;n=Math.floor((n-1)/26))s=String.fromCharCode(65+(n-1)%26)+s;return s}
+let sampleWorkbook=null, sampleRows=[], lastPreviewToken=0;
+function getHeaderIndex(){return 0}
+function guessHeaderRow(rows){let best=0,score=-1;for(let i=0;i<Math.min(25,rows.length);i++){const r=rows[i]||[];const nonempty=r.filter(v=>String(v??'').trim()).length;const next=(rows[i+1]||[]).filter(v=>String(v??'').trim()).length;const rank=nonempty*2+Math.min(next,nonempty)-i*.2;if(nonempty>=2&&rank>score){best=i;score=rank}}return best}
+function setFilterColumns(headings){const sel=$('#filterColumn'),old=sel.value;sel.replaceChildren();const total=Math.max(headings.length,sampleRows.reduce((max,r)=>Math.max(max,r.length),0));for(let i=0;i<Math.min(200,total);i++){const v=headings[i];const option=document.createElement('option');option.value=String(i+1);option.textContent=colName(i+1)+'열'+(v!==undefined&&v!==null&&String(v).trim()?' — '+String(v).slice(0,65):' (제목 없음)');sel.append(option)}sel.disabled=total===0;sel.value=Array.from(sel.options).some(x=>x.value===old)?old:(sel.options[0]?.value||'');$('#columnState').textContent= total?'원본에서 '+total+'개 열을 인식했습니다. 위 목록에서 실제 검색할 열을 고른 뒤 단어를 입력하세요.':'선택한 시트에 데이터가 없거나 열을 읽지 못했습니다.'}
+async function refreshFilterColumns(){const select=$('#sampleFile');const oldName=select.value;select.replaceChildren();if(!files.length){sampleWorkbook=null;sampleRows=[];$('#sampleSheet').innerHTML='<option value="0">첫 번째 시트</option>';setFilterColumns([]);renderPreview([],[]);$('#matchCount').textContent='파일 업로드 전';return}files.forEach((f,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=f.name;select.append(opt)});const idx=Number(oldName);select.value=String(Number.isInteger(idx)&&idx>=0&&idx<files.length?idx:0);await loadPreviewFile()}
+async function loadPreviewFile(){const f=files[Number($('#sampleFile').value)];if(!f)return;$('#columnState').textContent='열 목록을 불러오는 중...';const sheetSelect=$('#sampleSheet');sheetSelect.replaceChildren();try{if(/\.csv$/i.test(f.name)){sampleWorkbook={type:'csv',data:await readCSV(f)};sheetSelect.add(new Option('CSV 데이터', '0'))}else{const ExcelJS=await loadExcelJS();const wb=new ExcelJS.Workbook();await wb.xlsx.load(await f.arrayBuffer());sampleWorkbook={type:'xlsx',data:wb};wb.worksheets.forEach((ws,i)=>sheetSelect.add(new Option(ws.name,String(i))))}sheetSelect.value='0';updatePreviewSheet()}catch(e){sampleWorkbook=null;sampleRows=[];setFilterColumns([]);$('#columnState').textContent='열 정보를 읽지 못했습니다: '+e.message;$('#previewStatus').textContent='읽기 실패: '+e.message;status('파일은 선택되었으나 내용을 읽지 못했습니다: '+e.message,'error')}}
+function updatePreviewSheet(){if(!sampleWorkbook)return;const i=Number($('#sampleSheet').value)||0;let rows=[];if(sampleWorkbook.type==='csv'){rows=sampleWorkbook.data}else{const ws=sampleWorkbook.data.worksheets[i];if(ws){const cols=Math.min(200,Math.max(ws.columnCount||0, ...[1,2,3].map(n=>ws.getRow(n).cellCount||0)));const max=Math.min(5000,ws.rowCount||0);for(let r=1;r<=max;r++)rows.push(Array.from({length:cols},(_,c)=>cellText(ws.getRow(r).getCell(c+1))))}}sampleRows=rows;setFilterColumns(rows[0]||[]);updateSamplePreview()}
+function renderPreview(head,rows){const thead=$('#previewHead'),tbody=$('#previewBody');thead.replaceChildren();tbody.replaceChildren();const tr=document.createElement('tr');(head.length?head:['검색 결과']).slice(0,30).forEach((v,i)=>{const th=document.createElement('th');th.textContent=colName(i+1)+' · '+(v||'');tr.append(th)});thead.append(tr);if(!rows.length){const row=document.createElement('tr'),td=document.createElement('td');td.textContent='일치하는 행이 없습니다.';td.colSpan=Math.max(1,head.length);row.append(td);tbody.append(row)}else rows.slice(0,30).forEach(cells=>{const tr=document.createElement('tr');cells.slice(0,30).forEach(v=>{const td=document.createElement('td');td.textContent=cellText({value:v});tr.append(td)});tbody.append(tr)})}
+function updateSamplePreview(){const index=getHeaderIndex(),hdr=sampleRows[index]||[];try{const filter=getFilter(),data=sampleRows.slice(index+1),match=data.filter(row=>rowMatches(row.map(value=>({value})),filter));const view=filter.enabled?match:data;renderPreview(hdr,view);$('#matchCount').textContent='선택 파일의 검색 결과 '+view.length+'행';$('#previewStatus').textContent=filter.enabled?'선택 파일·시트의 미리보기입니다. 전체 '+data.length+'행 중 '+match.length+'행이 일치합니다. 표는 최대 30행 표시합니다.':'검색어를 입력하고 열을 선택하면 해당 열에 일치하는 행만 표시됩니다.'}catch(e){renderPreview(hdr,[]);$('#previewStatus').textContent=e.message;$('#matchCount').textContent='조건 확인 필요'}}
+$('#sampleFile').addEventListener('change',loadPreviewFile);$('#sampleSheet').addEventListener('change',updatePreviewSheet);
+['filterColumn','keyword','keepHeader','useFilter'].forEach(id=>$('#'+id).addEventListener('input',updateSamplePreview));
+$('#preview').onclick=updateSamplePreview;
+function cellText(cell){let v=cell?.value;if(v==null)return '';if(v instanceof Date)return isNaN(v.getTime())?'':v.getFullYear()+'-'+String(v.getMonth()+1).padStart(2,'0')+'-'+String(v.getDate()).padStart(2,'0');if(typeof v==='object'){if(Array.isArray(v.richText))return v.richText.map(x=>x.text||'').join('');if(v.text!=null)return String(v.text);if(v.result!=null)return String(v.result);if(v.hyperlink!=null)return String(v.hyperlink);return ''}return String(v)}
+function getFilter(){const enabled=$('#useFilter').checked;const keyword=$('#keyword').value.trim().toLocaleLowerCase();return {enabled:enabled&&!!keyword,keyword,column:$('#filterColumn').value,headerRow:1,headerName:(sampleRows[getHeaderIndex()]||[])[Number($('#filterColumn').value)-1]||'',keepHeader:$('#keepHeader').checked}}
+function rowMatches(cells,filter){if(!filter.enabled)return true;const eligible=filter.column==='*'?cells:[cells[Number(filter.column)-1]];return eligible.some(c=>cellText(c).toLocaleLowerCase().includes(filter.keyword))}
+function chooseRows(src,filter){const retained=[];const hdr=filter.headerRow||1;let adjusted={...filter};if(filter.enabled&&filter.headerName){const match=String(filter.headerName).trim();if(match){const header=src.getRow(hdr);for(let i=1;i<=Math.max(src.columnCount||0,header.cellCount||0);i++){if(cellText(header.getCell(i)).trim()===match){adjusted.column=String(i);break}}}}src.eachRow({includeEmpty:true},(row,n)=>{if(!filter.enabled||filter.keepHeader&&n===hdr||n>hdr&&rowMatches(Array.from({length:Math.max(src.columnCount||0,row.cellCount||0)},(_,i)=>row.getCell(i+1)),adjusted))retained.push(n)});return retained}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function loadJSZip(){if(window.JSZip)return window.JSZip;for(const url of ['https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js','https://unpkg.com/jszip@3.10.1/dist/jszip.min.js']){try{await new Promise((resolve,reject)=>{const sc=document.createElement('script');sc.src=url;sc.onload=resolve;sc.onerror=reject;document.head.appendChild(sc)});if(window.JSZip)return window.JSZip}catch(e){}}throw Error('이미지 분석 라이브러리 JSZip을 불러오지 못했습니다.')}
+function norm(path){let parts=[];for(const x of path.split('/')){if(x==='..')parts.pop();else if(x&&x!=='.')parts.push(x)}return parts.join('/')}
+function resolvePath(base,target){if(!target)return '';target=decodeURIComponent(target.split('#')[0]);return target.startsWith('/')?norm(target):norm(base.split('/').slice(0,-1).join('/')+'/'+target)}
+function xmlDoc(txt){const d=new DOMParser().parseFromString(txt,'application/xml');if(d.getElementsByTagName('parsererror').length)throw Error('XML 구문 오류');return d}
+function childrenByLocal(parent,name){return Array.from(parent.getElementsByTagName('*')).filter(x=>x.localName===name)}
+function directByLocal(parent,name){return Array.from(parent.children||[]).find(x=>x.localName===name)}
+function relMap(doc,fromPath){const m={};for(const r of childrenByLocal(doc,'Relationship')){const id=r.getAttribute('Id'),target=r.getAttribute('Target');if(id&&target&&r.getAttribute('TargetMode')!=='External')m[id]={path:resolvePath(fromPath,target),type:r.getAttribute('Type')||''}}return m}
+function relsName(path){const a=path.split('/'),basename=a.pop();return a.join('/')+'/_rels/'+basename+'.rels'}
+async function readXml(zip,path){const f=zip.file(path);return f?xmlDoc(await f.async('string')):null}
+function anchorCoord(anchor,tag){const marker=directByLocal(anchor,tag);if(!marker)return null;const v=n=>Number(directByLocal(marker,n)?.textContent||0);return {col:v('col'),row:v('row'),colOff:v('colOff')/9525,rowOff:v('rowOff')/9525}}
+function detectImageFormat(bytes,path){
+  if(bytes.length>=3&&bytes[0]===0xFF&&bytes[1]===0xD8&&bytes[2]===0xFF)return 'jpeg';
+  if(bytes.length>=8&&bytes[0]===0x89&&bytes[1]===0x50&&bytes[2]===0x4E&&bytes[3]===0x47)return 'png';
+  if(bytes.length>=6&&bytes[0]===0x47&&bytes[1]===0x49&&bytes[2]===0x46)return 'gif';
+  // MIME parameter suffixes are not file extensions: .jpeg;charset=... -> jpeg
+  const ext=(String(path).split('/').pop().split('.').pop()||'').split(/[;?]/)[0].toLowerCase();
+  if(ext==='jpg'||ext==='jpe'||ext==='jpeg')return 'jpeg';
+  if(ext==='png'||ext==='gif')return ext;
+  return null;
+}
+function normalizeImageExtension(value){const ext=String(value||'png').split(';')[0].replace(/^image\//,'').toLowerCase();return ext==='jpg'||ext==='jpe'?'jpeg':ext}
+async function importRawImages(zip,sourceIndex,src,dest,destBook,warnings,rowOffset=0,rowMap=null){
+ const wb=await readXml(zip,'xl/workbook.xml'),wrels=await readXml(zip,'xl/_rels/workbook.xml.rels');if(!wb||!wrels)return {found:0,added:0};
+ const wm=relMap(wrels,'xl/workbook.xml');const sheets=childrenByLocal(wb,'sheet');const sn=sheets[sourceIndex];if(!sn)return {found:0,added:0};
+ const rid=sn.getAttribute('r:id')||sn.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','id');const sheetPath=wm[rid]?.path;if(!sheetPath)return {found:0,added:0};
+ const sd=await readXml(zip,sheetPath),sr=await readXml(zip,relsName(sheetPath));if(!sd||!sr)return {found:0,added:0};
+ const sm=relMap(sr,sheetPath);let found=0,added=0;
+ for(const dr of childrenByLocal(sd,'drawing')){
+  const drid=dr.getAttribute('r:id')||dr.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','id');const drawPath=sm[drid]?.path;if(!drawPath)continue;
+  const dd=await readXml(zip,drawPath),rr=await readXml(zip,relsName(drawPath));if(!dd||!rr)continue;
+  const rm=relMap(rr,drawPath);
+  for(const anc of Array.from(dd.documentElement.children).filter(x=>['twoCellAnchor','oneCellAnchor','absoluteAnchor'].includes(x.localName))){
+   const pics=childrenByLocal(anc,'pic');for(const pic of pics){
+    const blip=childrenByLocal(pic,'blip')[0];if(!blip)continue;
+    const imgRid=blip.getAttribute('r:embed')||blip.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','embed');const asset=rm[imgRid];found++;
+    if(!asset){warnings.push(src.name+' 그림 참조 파일 없음');continue}
+    const f=zip.file(asset.path);if(!f){warnings.push(src.name+' 그림 파일 누락: '+asset.path);continue}
+    const buffer=await f.async('uint8array');
+    // File extensions may include MIME parameters, such as jpeg;charset=iso-8859-1.
+    // Detect the actual format from the file signature first, not from the path.
+    const format=detectImageFormat(buffer,asset.path);
+    if(!format){warnings.push(src.name+' 지원되지 않는 그림 파일: '+asset.path);continue}
+    const id=destBook.addImage({buffer,extension:format});
+    const from=anchorCoord(anc,'from');const to=anchorCoord(anc,'to');let range;
+    if(rowMap){if(!from||!rowMap.has(from.row))continue;const frow=rowMap.get(from.row);const originalSpan=to?Math.max(0,to.row-from.row):0;const mappedEnd=to&&rowMap.has(to.row)?rowMap.get(to.row):frow+Math.min(originalSpan,1);from.row=frow-rowOffset;if(to)to.row=mappedEnd-rowOffset;}
+    if(from&&to){range={tl:{col:from.col+from.colOff/65,row:from.row+rowOffset+from.rowOff/20},br:{col:to.col+to.colOff/65,row:to.row+rowOffset+to.rowOff/20},editAs:'oneCell'}}
+    else if(from){const extEl=directByLocal(anc,'ext');const cx=Number(extEl?.getAttribute('cx')||952500),cy=Number(extEl?.getAttribute('cy')||190500);range={tl:{col:from.col+from.colOff/65,row:from.row+rowOffset+from.rowOff/20},ext:{width:cx/9525,height:cy/9525},editAs:'oneCell'}}
+    else {warnings.push(src.name+' 절대 위치 그림은 위치 변환 불가');continue}
+    try{dest.addImage(id,range);added++}catch(e){warnings.push(src.name+' 그림 삽입 오류: '+e.message)}
+   }
+  }
+ }
+ return {found,added};
+}
+
+async function loadExcelJS(){if(window.ExcelJS)return window.ExcelJS;const urls=['https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js','https://unpkg.com/exceljs@4.4.0/dist/exceljs.min.js'];for(const url of urls){try{await new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=url;script.onload=resolve;script.onerror=()=>reject(new Error('스크립트 연결 실패'));document.head.appendChild(script);setTimeout(()=>{if(!window.ExcelJS)reject(new Error('연결 시간 초과'))},12000)});if(window.ExcelJS)return window.ExcelJS}catch(e){console.warn(url,e)}}throw new Error('ExcelJS 라이브러리를 가져오지 못했습니다. 인터넷 연결 또는 회사 방화벽을 확인해주세요.')}
+function nameSafe(s){return String(s).replace(/[\\/*?:\[\]]/g,'_').trim()||'시트'}
+function uniqueSheetName(wb,n){let base=nameSafe(n).slice(0,31),name=base,i=2;while(wb.getWorksheet(name)){let suffix='_'+i++;name=base.slice(0,31-suffix.length)+suffix}return name}
+function clone(v){if(v===null||v===undefined)return v;if(typeof structuredClone==='function'){try{return structuredClone(v)}catch(e){}}try{return JSON.parse(JSON.stringify(v))}catch(e){return v}}
+function getImageExt(source,im){const raw=source.model?.media?.find(m=>m.index===im.imageId)||source.model?.media?.[im.imageId];return raw?.extension||'png'}
+function offsetMergedRange(range,shift){
+ return String(range).replace(/([A-Z]{1,3})(\d+)/g,(_,col,num)=>col+String(Number(num)+shift));
+}
+function appendSheet(src,dest,warnings,rowOffset,filter){
+ const keep=chooseRows(src,filter),map=new Map(keep.map((n,i)=>[n-1,rowOffset+i]));
+ if(src.columns)src.columns.forEach((c,i)=>{const d=dest.getColumn(i+1);if(c.width!==undefined)d.width=Math.max(d.width||0,c.width)});
+ for(const n of keep){const r=src.getRow(n),d=dest.getRow(map.get(n-1)+1);
+  if(r.height!==undefined)d.height=r.height;if(r.hidden)d.hidden=true;if(r.outlineLevel)d.outlineLevel=r.outlineLevel;if(r.style&&Object.keys(r.style).length)d.style=clone(r.style);
+  r.eachCell({includeEmpty:true},(cell,col)=>{const target=d.getCell(col);target.value=clone(cell.value);if(cell.style)target.style=clone(cell.style);if(cell.numFmt)target.numFmt=cell.numFmt;if(cell.alignment)target.alignment=clone(cell.alignment);if(cell.protection)target.protection=clone(cell.protection);if(cell.note)target.note=clone(cell.note)});
+ }
+ for(const m of src.model?.merges||[]){try{
+  const mm=String(m).match(/^([A-Z]+)(\d+):([A-Z]+)(\d+)$/);if(!mm)continue;
+  const start=+mm[2]-1,end=+mm[4]-1;const pos=Array.from({length:end-start+1},(_,i)=>map.get(start+i));
+  if(pos.some(v=>v===undefined)||pos.some((v,i)=>i&&v!==pos[i-1]+1)){if(filter.enabled)warnings.push(src.name+' 일부 병합 셀은 선택되지 않아 제외됨: '+m);continue}
+  dest.mergeCells(mm[1]+(pos[0]+1)+':'+mm[3]+(pos[pos.length-1]+1));
+ }catch(e){warnings.push(src.name+' 병합 셀 '+m+': '+e.message)}}
+ return {height:keep.length,rowMap:map,sourceRows:Math.max(src.rowCount||0,src.lastRow?.number||0),kept:keep.length};
+}
+function appendCSV(rows,dest,rowOffset,filter){const map=new Map(),kept=[];const hdr=(filter.headerRow||1)-1;let adjusted={...filter};if(filter.enabled&&filter.headerName&&rows[hdr]){const idx=rows[hdr].findIndex(x=>String(x).trim()===String(filter.headerName).trim());if(idx>=0)adjusted.column=String(idx+1)}rows.forEach((r,i)=>{const cells=r.map(x=>({value:x}));if(!filter.enabled||filter.keepHeader&&i===hdr||i>hdr&&rowMatches(cells,adjusted))kept.push(i)});kept.forEach((i,j)=>{map.set(i,rowOffset+j);const row=dest.getRow(rowOffset+j+1);rows[i].forEach((v,c)=>row.getCell(c+1).value=v)});return {height:kept.length,rowMap:map,sourceRows:rows.length,kept:kept.length}}
+async function copyFallbackImages(src,source,dest,destBook,warnings,rowOffset,rowMap){
+ let n=0;
+ for(const im of src.getImages())try{
+  const orig=source.getImage(im.imageId);if(!orig)continue;
+  const id=destBook.addImage({buffer:orig.buffer,base64:orig.base64,extension:normalizeImageExtension(orig.extension||'png')});
+  const range=clone(im.range);if(!range)continue;
+  if(range.tl){const original=Math.floor(range.tl.row);if(rowMap&&!rowMap.has(original))continue;const destRow=rowMap?rowMap.get(original):original+rowOffset;range.tl.row=destRow+(range.tl.row-original)}
+  if(range.br){const original=Math.floor(range.br.row);const destRow=rowMap&&rowMap.has(original)?rowMap.get(original):range.tl.row+Math.min(1,Math.max(0,range.br.row-(im.range.tl?.row||0)));range.br.row=destRow+(range.br.row-original)}
+  dest.addImage(id,range);n++;
+ }catch(e){warnings.push(src.name+' 기본 이미지 복사 실패: '+e.message)}
+ return n;
+}
+function parseCSV(str){str=str.replace(/^\uFEFF/,'');let out=[],r=[],v='',q=false;const sample=str.split(/\r?\n/).find(x=>x.trim())||'';const delims=[',','\t',';'];const delim=delims.sort((a,b)=>sample.split(b).length-sample.split(a).length)[0];for(let i=0;i<str.length;i++){let c=str[i];if(q){if(c==='"'&&str[i+1]==='"'){v+='"';i++}else if(c==='"')q=false;else v+=c}else if(c==='"'&&v==='')q=true;else if(c===delim){r.push(v);v=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&str[i+1]==='\n')i++;r.push(v);out.push(r);r=[];v=''}else v+=c}if(v!==''||r.length){r.push(v);out.push(r)}return out}
+async function readCSV(file){const bytes=await file.arrayBuffer();let s=new TextDecoder('utf-8').decode(bytes);if(s.includes('\uFFFD'))try{s=new TextDecoder('euc-kr').decode(bytes)}catch(e){}return parseCSV(s)}
+
+let downloadUrl=null,downloadFileName='원본보존_병합.xlsx',extractUrl=null,extractFileName='조건추출.xlsx';
+function releaseDownload(mode){if(mode!=='extract'&&downloadUrl){URL.revokeObjectURL(downloadUrl);downloadUrl=null}if(mode!=='merge'&&extractUrl){URL.revokeObjectURL(extractUrl);extractUrl=null}if(mode!=='extract')$('#save').disabled=true;if(mode!=='merge')$('#saveExtract').disabled=true;}
+function triggerDownload(mode){const url=mode==='extract'?extractUrl:downloadUrl;const filename=mode==='extract'?extractFileName:downloadFileName;if(!url){status('이 작업으로 생성된 파일이 없습니다. 먼저 해당 XLSX 만들기 버튼을 눌러주세요.','error');return}const a=document.createElement('a');a.href=url;a.download=filename;a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),1000);}
+$('#save').onclick=()=>triggerDownload('merge');$('#saveExtract').onclick=()=>triggerDownload('extract');
+window.addEventListener('beforeunload',()=>{if(downloadUrl)URL.revokeObjectURL(downloadUrl);if(extractUrl)URL.revokeObjectURL(extractUrl)});
+async function buildFile(mode){
+ if(!files.length){status('먼저 파일을 선택해주세요.','error');return}
+ const btn=mode==='extract'?$('#extract'):$('#merge');btn.disabled=true;releaseDownload(mode);
+ const warnings=[];let stage='파일 처리 준비';
+ try{
+  stage='라이브러리 로드';status('엑셀 처리 라이브러리 준비 중…');
+  const ExcelJS=await loadExcelJS(),JSZip=await loadJSZip();
+  const destBook=new ExcelJS.Workbook(),target=destBook.addWorksheet('통합');
+  const scope=document.querySelector('input[name="scope"]:checked').value;
+  const gap=$('#gap').checked?1:0;const filter=mode==='extract'?getFilter():{enabled:false,keyword:'',column:'*',keepHeader:true};
+  if(mode==='extract'&&!filter.column)throw Error('먼저 원본 파일을 업로드한 뒤 검색할 열을 선택하세요.');
+  if(mode==='extract'&&!filter.enabled)throw Error('선택한 열에서 검색할 단어를 입력하세요.');
+  let count=0,images=0,found=0,offset=0;
+  for(let fi=0;fi<files.length;fi++){
+   const file=files[fi];stage=file.name+' 읽기';
+   status('처리 중 ('+(fi+1)+'/'+files.length+'): '+file.name+' / 통합 시트 '+(offset+1)+'행부터');
+   await sleep(0);
+   if(/\.csv$/i.test(file.name)){
+    try{const rows=await readCSV(file);const part=appendCSV(rows,target,offset,filter);if(part.height){offset+=part.height+gap;count++}else warnings.push(file.name+' CSV에서 조건에 맞는 행이 없습니다.')}
+    catch(e){warnings.push(file.name+' CSV 읽기 오류: '+e.message)}
+    continue;
+   }
+   const source=new ExcelJS.Workbook();let zip;
+   try{const bytes=await file.arrayBuffer();zip=await JSZip.loadAsync(bytes);await source.xlsx.load(bytes)}
+   catch(e){warnings.push(file.name+' XLSX 읽기 오류: '+e.message);continue}
+   const worksheets=scope==='first'?[source.worksheets[0]]:source.worksheets;
+   for(const src of worksheets){
+    if(!src)continue;
+    const currentOffset=offset;
+    const part=appendSheet(src,target,warnings,currentOffset,filter);if(!part.height){warnings.push(file.name+' / '+src.name+' 조건에 맞는 행이 없습니다.');continue}
+    stage='사진 복사: '+file.name+' / '+src.name;
+    const imported=await importRawImages(zip,source.worksheets.indexOf(src),src,target,destBook,warnings,currentOffset,part.rowMap);
+    found+=imported.found;images+=imported.added;
+    if(imported.found===0&&src.getImages().length){
+     warnings.push(src.name+' 원본 이미지 XML 경로 미확인: 기본 이미지 복사 시도');
+     images+=await copyFallbackImages(src,source,target,destBook,warnings,currentOffset,part.rowMap);
+    }
+    offset+=part.height+gap;count++;
+   }
+  }
+  if(!count)throw Error('병합 가능한 시트가 없습니다.\n'+warnings.join('\n'));
+  stage='XLSX 생성';status('한 시트에 '+count+'개 원본 블록을 병합했습니다. 사진 '+images+'개 포함하여 XLSX 생성 중…');
+  await sleep(20);
+  const buffer=await destBook.xlsx.writeBuffer();
+  if(!buffer||!buffer.byteLength)throw Error('XLSX 파일이 비어 있습니다.');
+  const blob=new Blob([buffer],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  if(mode==='extract'){extractUrl=URL.createObjectURL(blob);extractFileName=(nameSafe($('#out').value)||'한시트_통합')+'_추출.xlsx';$('#saveExtract').disabled=false}else{downloadUrl=URL.createObjectURL(blob);downloadFileName=(nameSafe($('#out').value)||'한시트_통합')+'_전체병합.xlsx';$('#save').disabled=false}
+  status((mode==='extract'?'조건 추출':'전체 병합')+' 완료: 1개 시트 / '+count+'개 원본 블록 / '+Math.max(0,offset-gap)+'행 / 사진 '+found+'개 발견, '+images+'개 삽입 / '+(blob.size/1024/1024).toFixed(2)+' MB.\n['+(mode==='extract'?'추출 결과 XLSX 다운로드':'전체 병합 XLSX 다운로드')+'] 버튼을 눌러 저장하세요.'+(warnings.length?'\n주의사항:\n'+warnings.slice(0,25).join('\n')+(warnings.length>25?'\n외 '+(warnings.length-25)+'건':''):''),'success');
+ }catch(e){console.error(e);status((mode==='extract'?'추출':'병합')+' 실패 ('+stage+'): '+(e?.message||String(e)),'error')}
+ finally{btn.disabled=false}
+}
+$('#merge').onclick=()=>buildFile('merge');$('#extract').onclick=()=>buildFile('extract');
+
+// Navigation changes display only; file processing state and export functions are shared.
+function openWorkspace(mode){
+ const home=mode==='home', extract=mode==='extract';
+ document.getElementById('hubHome').hidden=!home;
+ document.getElementById('modeHeading').hidden=home;
+ document.getElementById('workflow').hidden=home;
+ document.getElementById('uploadPanel').hidden=home;
+ document.getElementById('filterPanel').hidden=!extract;
+ document.getElementById('exportPanel').hidden=home;
+ document.getElementById('limitations').hidden=home;
+ document.getElementById('mergeCard').hidden=home||extract;
+ document.getElementById('extractCard').hidden=home||!extract;
+ document.getElementById('modeTitle').textContent=extract?'열 선택 · 조건 추출':'전체 엑셀 병합';
+ document.getElementById('modeDescription').textContent=extract?'원본 파일을 업로드하면 실제 열을 확인하고 검색어가 포함된 행만 추출하여 XLSX로 저장합니다.':'여러 엑셀/CSV 파일을 하나의 시트에 이어 붙이고 대표도면 사진과 기본 서식을 최대한 유지한 XLSX로 저장합니다.';
+ document.querySelector('#exportPanel h2').textContent=extract?'3. 조건 추출 XLSX 저장':'3. 전체 병합 XLSX 저장';
+ document.querySelector('#exportPanel .sub').textContent=extract?'선택한 열에 검색어가 포함된 행만 추출해 저장합니다.':'모든 원본의 데이터를 검색 조건 없이 한 시트에 병합합니다.';
+ document.querySelectorAll('.workspace-tab').forEach(tab=>{const active=tab.dataset.mode===mode;tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1});
+ if(!home && window.location.hash!==('#'+mode))history.replaceState(null,'','#'+mode);
+ if(home && window.location.hash)history.replaceState(null,'',location.pathname+location.search);
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.workspace-tab').forEach(btn=>btn.addEventListener('click',()=>openWorkspace(btn.dataset.mode)));
+document.querySelectorAll('[data-open-mode]').forEach(link=>link.addEventListener('click',e=>{e.preventDefault();openWorkspace(link.dataset.openMode)}));
+openWorkspace(location.hash==='#merge'?'merge':location.hash==='#extract'?'extract':'home');
+</script></body></html>
